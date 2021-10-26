@@ -36,12 +36,23 @@ public class MaxEmployees {
         Employee maxId = employees.stream()
                 .max((Employee e1, Employee e2) -> e1.getId() - e2.getId()).orElse(Employee.DEFAULT_EMPLOYEE);
 
+        // getting maxName with anonymous class
         Employee maxName = employees.stream()
+                .max(new Comparator<Object>() {
+                    @Override
+                    public int compare(Object o1, Object o2) {
+                        return o1.toString().compareTo(o2.toString());
+                    }
+                }).orElse(Employee.DEFAULT_EMPLOYEE);
+
+        // getting maxName with labmda
+        Employee maxName1 = employees.stream()
                 .max((Object o1, Object o2) -> o1.toString().compareTo(o2.toString())).orElse(Employee.DEFAULT_EMPLOYEE);
 
         System.out.println("\nmaxId with anonymous class: " + maxId1);
-        System.out.println("maxId with lambda:          " + maxId);
-        System.out.println("maxName:                    " + maxName);
+        System.out.println("maxId with lambda:            " + maxId);
+        System.out.println("maxName with anonymous class: " + maxName);
+        System.out.println("maxName with lambda:          " + maxName1);
 
         // solution with comparingInt method
         maxId = employees.stream()
