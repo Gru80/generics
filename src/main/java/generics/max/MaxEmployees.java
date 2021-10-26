@@ -22,18 +22,34 @@ public class MaxEmployees {
 
     public static void main(String[] args) {
         List<Employee> employees = createEmployees();
+
+        //  getting maxId via explicit code of anonymous class
+        Employee maxId1 = employees.stream()
+                .max(new Comparator<Employee>() {
+                    @Override
+                    public int compare(Employee e1, Employee e2) {
+                        return e1.getId() - e2.getId();
+                    }
+                }).orElse(Employee.DEFAULT_EMPLOYEE);
+
+        // getting maxId via lambda
         Employee maxId = employees.stream()
                 .max((Employee e1, Employee e2) -> e1.getId() - e2.getId()).orElse(Employee.DEFAULT_EMPLOYEE);
+
         Employee maxName = employees.stream()
                 .max((Object o1, Object o2) -> o1.toString().compareTo(o2.toString())).orElse(Employee.DEFAULT_EMPLOYEE);
-        System.out.println(maxId);
-        System.out.println(maxName);
 
+        System.out.println("\nmaxId with anonymous class: " + maxId1);
+        System.out.println("maxId with lambda:          " + maxId);
+        System.out.println("maxName:                    " + maxName);
+
+        // solution with comparingInt method
         maxId = employees.stream()
                 .max(comparingInt(Employee::getId)).orElse(Employee.DEFAULT_EMPLOYEE);
         maxName = employees.stream()
                 .max(comparing(Object::toString)).orElse(Employee.DEFAULT_EMPLOYEE);
-        System.out.println(maxId);
-        System.out.println(maxName);
+
+        System.out.println("\nmaxId using comparingInt(): " + maxId);
+        System.out.println("maxName using compare():    " + maxName);
     }
 }
