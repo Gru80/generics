@@ -17,20 +17,29 @@ public class GenericDemo {
         List<Integer> myIntegers = new ArrayList<>();
         myIntegers.add(42);
 
-
+        System.out.println("\n*** Typed with classes ***");
         Pair<String> myPair = new Pair<>("Ben", "Holly");
         PairXtended<Integer, String> myXtendedPair = new PairXtended<>(0, "Zero");
-
         System.out.println(myPair.toString());
         System.out.println(myXtendedPair.toString());
 
-        // bounded types
+        // bounded types - Number
+        System.out.println("\n*** Bounded Types - Number ***");
         PairNumbers<Integer> myIntPair = new PairNumbers<>(10, 100);
         PairNumbers<Double> myDoublePair = new PairNumbers<>(5.5, 15.5);
         // this would cause a compiler error, because String does not extend Number:
         //    PairNumbers<String> myStringPair = new PairNumbers<String>("0", "10");
+        System.out.println(myIntPair.toString());
+        System.out.println(myDoublePair.toString());
+
+        // bounded types - Comparable
+        System.out.println("\n*** Bounded Types - Comparable ***");
+        PairComparable<Integer> myCint1 = new PairComparable<>(123, 456);
+        PairComparable<Integer> myCint2 = new PairComparable<>(567, 234);
+        System.out.println(myCint1.getLarger());
 
         // generics with methods - usage
+        System.out.println("\n*** Types with methods ***");
         List<String> originalList = Arrays.asList("Hello", "world");
         List<Integer> intList = Arrays.asList(1, 2, 3, 4, 5, 6);
         System.out.println(reverse(originalList));
