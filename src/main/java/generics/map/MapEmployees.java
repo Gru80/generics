@@ -44,10 +44,15 @@ public class MapEmployees {
         // Add employees to a map using id as key
         Map<Integer, Employee> employeeMap = employees.stream()
                 .collect(toMap(Employee::getId, Function.identity()));
+        // Function.identity() basically does:  for each employee return the employee
+        // same thing (function wise) would be: e -> e
+
+        System.out.println("\n*** Output the employeeMap ***");
         employeeMap.forEach((id, emp) -> System.out.println(id + ": " + emp));
 
+
         // Sort employees by id and print them
-        System.out.println("Sorted by key:");
+        System.out.println("\nSorted by key:");
         employeeMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .forEach(entry -> {
@@ -55,7 +60,7 @@ public class MapEmployees {
                 });
 
         // Reverse sort employees by id and print them
-        System.out.println("Reverse sorted by key:");
+        System.out.println("\nReverse sorted by key:");
         employeeMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
                 .forEach(entry -> {
