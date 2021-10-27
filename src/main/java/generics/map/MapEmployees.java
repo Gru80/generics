@@ -21,7 +21,9 @@ public class MapEmployees {
                 new Employee(1, "Peter Gibbons"),
                 new Employee(2, "Samir Nagheenanajar"),
                 new Employee(3, "Michael Bolton"),
-                new Employee(4, "Milton Waddams")
+                new Employee(4, "Milton Waddams"),
+                new Employee(5, "Jim Wu"),
+                new Employee(6, "Apu Nahasapeemapetilon")
         );
     }
 
@@ -92,7 +94,7 @@ public class MapEmployees {
                 });
 
         // Now that Employee implements Comparable ...
-        System.out.println("\nSorted by name in natural order:");
+        System.out.println("\nSorted by name in natural order (name length):");
         employeeMap.entrySet().stream()
                 // ...this can be done
                 .sorted(Map.Entry.comparingByValue())
