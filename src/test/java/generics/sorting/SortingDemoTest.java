@@ -61,18 +61,6 @@ public class SortingDemoTest {
         checkLength(demo.lengthSortWithLambda());
     }
 
-    @Test
-    public void testLengthSortThenAlphaSort() throws Exception {
-        demo.lengthSortThenAlphaSort().stream()
-                .reduce((prev, curr) -> {
-                    if (prev.length() != curr.length()) {
-                        assertTrue(prev.length() <= curr.length());
-                    } else {
-                        assertTrue(prev.compareTo(curr) <= 0);
-                    }
-                    return curr;
-                });
-    }
 
     @Test
     public void testLengthSortUsingSorted() throws Exception {

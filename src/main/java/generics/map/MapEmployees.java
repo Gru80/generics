@@ -53,6 +53,7 @@ public class MapEmployees {
 
         // Sort employees by id and print them
         System.out.println("\nSorted by key:");
+        // entrySet() -> no duplicates
         employeeMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .forEach(entry -> {
@@ -62,16 +63,39 @@ public class MapEmployees {
         // Reverse sort employees by id and print them
         System.out.println("\nReverse sorted by key:");
         employeeMap.entrySet().stream()
+                // using the override of compareByKey - now the Comparator is provided:
                 .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
                 .forEach(entry -> {
                     System.out.println(entry.getKey() + ": " + entry.getValue());
                 });
 
         // Sort employees by name and print them
-        System.out.println("Sorted by name:");
+        System.out.println("\nSorted by name:");
         employeeMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(comparing(Employee::getName)))
+                // lambda version would be:
+                // .sorted(Map.Entry.comparingByValue(comparing(e -> e.getName())))
+                //
+                // following would cause compiler error, because Employee has no natural order implemented:
                 // .sorted(Map.Entry.comparingByValue())
+                .forEach(entry -> {
+                    System.out.println(entry.getKey() + ": " + entry.getValue());
+                });
+
+        // Sort employees by name and print them
+        System.out.println("\nSorted by length of name:");
+        employeeMap.entrySet().stream()
+                // *-1 to get the name with the most characters descending
+                .sorted(Map.Entry.comparingByValue(comparing(e -> e.getName().length()*-1)))
+                .forEach(entry -> {
+                    System.out.println(entry.getKey() + ": " + entry.getValue());
+                });
+
+        // Now that Employee implements Comparable ...
+        System.out.println("\nSorted by name in natural order:");
+        employeeMap.entrySet().stream()
+                // ...this can be done
+                .sorted(Map.Entry.comparingByValue())
                 .forEach(entry -> {
                     System.out.println(entry.getKey() + ": " + entry.getValue());
                 });

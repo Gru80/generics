@@ -1,6 +1,6 @@
 package generics.max;
 
-public class Employee {
+public class Employee implements Comparable<Employee>{
     public static final Employee DEFAULT_EMPLOYEE = new Employee(0, "No Name");
 
     private int id;
@@ -17,6 +17,11 @@ public class Employee {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int compareTo(Employee emp) {
+        return emp.name.length() - name.length();
     }
 
     @Override
